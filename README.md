@@ -83,7 +83,7 @@ Your finished project should:
 - be well-tested
 
 When submitting the project please answer the following questions:
- 1. What gems if any did you choose to use and why?
+ 1. What gems if any did you choose to use and why? pry to debug;
  2. Were there any specific challenges or struggles you faced along the way?
  3. Is there anything you'd want to improve or optimize if you had more time?
  4. If you were to take this project to production, what would be on your list of things to do?
