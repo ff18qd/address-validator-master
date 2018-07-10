@@ -13,25 +13,34 @@ $(document).ready(function () {
         var state =  $("input[id='state']").val();
         var zip =  $("input[id='zip_code']").val();
         var singleadd = `${st},  ${city}, ${state}, ${zip}`;
-        var token = "xSgC8zbk8SfEAUJaattzPe0Q2nuB4eeX8q1YB95eam--tujj2Ezn5T58yrdcZJtPu8_9PIU1akW-BPCqm-4SxVMjKOiL2kEgYPdFNZi3DVPeGnHA1heeJBXmZab02CjNFOUdn4jHVokN7lQTQ0L7Hw.."
+        var token = "Pd8sde6pDbrh2Qd-s0lWhKyx8wwSsgkFisjOz7bdRiaTafAxokjWYVQKb2VcSUkuk_YYA_A5AADu4oYvumC2_hccdZP9ktXRVWO_Zo14Ieywc8aKTBJNc8ORb72e2W1RVl-oy-HQZLS5emQIBZaB3g.."
         var url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=" + singleadd +"&maxLocations=1&forStorage=true&outFields=AddNum,StName,StType,StPreDir,StDir,UnitType,UniteName,City,RegionAbbr,Postal&token=" + token +"&f=pjson"
 
         fetch(url)
           .then((resp) => resp.json())
           .then(function(data) {
-          // return this data to backend and try to persist
-          if (data["candidates"][0]["score"] < 95) {
-            $("input[id='street_address']").val('');
-            $("input[id='city']").val('');
-            $("input[id='state']").val('');
-            $("input[id='zip_code']").val('');
-            alert("not valid, please input again");
-          } else {
-            return data["candidates"][0];
-            
-          }
-          // console.log(data["candidates"][0]);
-          
+              // return this data to backend and try to persist
+              $("input[id='street_address']").val('');
+              $("input[id='city']").val('');
+              $("input[id='state']").val('');
+              $("input[id='zip_code']").val('');
+              
+              if (data["candidates"][0]["score"] < 95) {
+                alert("not valid, please input again");
+              } else {
+                fetch('http://ec2-18-222-196-89.us-east-2.compute.amazonaws.com:8080/addresses', {
+                    mode: 'same-origin',
+                    method: 'post',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data["candidates"][0])
+                  }).then(res=>res.json())
+                    .then(res => console.log(res));
+                // return data["candidates"][0];
+              }
+              
           })
       
     });

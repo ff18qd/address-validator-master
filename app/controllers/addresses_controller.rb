@@ -8,9 +8,9 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = params["street_address"] + ", " + params["city"] + ", " + params["state"] + ", " + params["zip_code"]
-    # binding.pry
-    # @address = Address.new(address_params)
+    # @address = params["street_address"] + ", " + params["city"] + ", " + params["state"] + ", " + params["zip_code"]
+    binding.pry
+    # @address = Address.new(:zip_5 params[:zip_code])
     # binding.pry
     # @address.save
 
@@ -24,6 +24,6 @@ class AddressesController < ApplicationController
   private
 
   def address_params
-    params.permit(:city, :state, :zip_code)
+    params.permit(:house_number,:street_name,:street_type,:street_predirection,:street_postdirection,:unit_number,:unit_type,:city, :state, :zip_code)
   end
 end
