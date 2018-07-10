@@ -14,32 +14,12 @@ $(document).ready(function () {
         var zip =  $("input[id='zip_code']").val();
         var singleadd = `${st},  ${city}, ${state}, ${zip}`;
         var token = "Pd8sde6pDbrh2Qd-s0lWhKyx8wwSsgkFisjOz7bdRiaTafAxokjWYVQKb2VcSUkuk_YYA_A5AADu4oYvumC2_hccdZP9ktXRVWO_Zo14Ieywc8aKTBJNc8ORb72e2W1RVl-oy-HQZLS5emQIBZaB3g.."
-        var url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=" + singleadd +"&maxLocations=1&forStorage=true&outFields=AddNum,StName,StType,StPreDir,StDir,UnitType,UniteName,City,RegionAbbr,Postal&token=" + token +"&f=pjson"
+        var url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=" + singleadd +"&maxLocations=1&forStorage=true&outFields=AddNum,StName,StType,StPreDir,StDir,UnitType,UnitName,City,RegionAbbr,Postal&token=" + token +"&f=pjson"
 
         fetch(url)
           .then((resp) => resp.json())
           .then(function(data) {
-              // return this data to backend and try to persist
-              $("input[id='street_address']").val('');
-              $("input[id='city']").val('');
-              $("input[id='state']").val('');
-              $("input[id='zip_code']").val('');
-              
-              if (data["candidates"][0]["score"] < 95) {
-                alert("not valid, please input again");
-              } else {
-                fetch('http://ec2-18-222-196-89.us-east-2.compute.amazonaws.com:8080/addresses', {
-                    mode: 'same-origin',
-                    method: 'post',
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data["candidates"][0])
-                  }).then(res=>res.json())
-                    .then(res => console.log(res));
-                // return data["candidates"][0];
-              }
+            $.post("http://ec2-18-222-196-89.us-east-2.compute.amazonaws.com:8080/addresses", { address: data["candidates"][0] })
               
           })
       
