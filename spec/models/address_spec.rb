@@ -1,4 +1,5 @@
 require 'rails_helper'
+# require 'spec_helper'
 
 RSpec.describe Address, :type => :model do
   describe '#new' do
