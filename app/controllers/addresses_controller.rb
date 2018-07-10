@@ -4,24 +4,19 @@ class AddressesController < ApplicationController
   end
 
   def new
-  
+    
   end
 
   def create
     @address = params["street_address"] + ", " + params["city"] + ", " + params["state"] + ", " + params["zip_code"]
-
+    # binding.pry
     # @address = Address.new(address_params)
     # binding.pry
     # @address.save
 
-    render 'new'
+    # render 'new'
   end
   
-  # def validation(address)  
-  #   # binding.pry
-  #   puts address
-  #   return true
-  # end 
   
   def show
   end
