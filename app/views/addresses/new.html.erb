@@ -1,4 +1,4 @@
-<%= form_tag '/addresses', method: :post do %>
+<%= form_tag '/addresses', method: :post, :id => "add_form" do %>
     <div>
       <%= label_tag :street_address %>
       <%= text_field_tag :street_address%>

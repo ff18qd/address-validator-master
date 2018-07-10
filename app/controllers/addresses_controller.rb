@@ -10,24 +10,18 @@ class AddressesController < ApplicationController
   def create
     @address = params["street_address"] + ", " + params["city"] + ", " + params["state"] + ", " + params["zip_code"]
 
-    if validation(@address)
-      puts "validation successful"
-      render 'new'
-    else 
-       render 'new'
-    end
     # @address = Address.new(address_params)
     # binding.pry
     # @address.save
 
-    # render 'new'
+    render 'new'
   end
   
-  def validation(address)  
-    # binding.pry
-    puts address
-    return true
-  end 
+  # def validation(address)  
+  #   # binding.pry
+  #   puts address
+  #   return true
+  # end 
   
   def show
   end
