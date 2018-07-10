@@ -10,16 +10,21 @@ class AddressesController < ApplicationController
   def create
     # @address = params["street_address"] + ", " + params["city"] + ", " + params["state"] + ", " + params["zip_code"]
     ref = params[:address][:attributes];
-    binding.pry
-    @address = Address.new(:house_number => ref[:AddNum], :street_name => ref[:StName], :street_type => ref[:StType],:street_predirection =>ref[:StPreDir],:street_postdirection => ref[:StDir],:unit_number => ref[:UnitName],:unit_type => ref[:UnitType],:city => ref[:City], :state => ref[:RegionAbbr],:zip_5 => ref[:Postal])
     # binding.pry
-    # @address.save
+    @address = Address.new(:house_number => ref[:AddNum], :street_name => ref[:StName], :street_type => ref[:StType],:street_predirection =>ref[:StPreDir],:street_postdirection => ref[:StDir],:unit_number => ref[:UnitName],:unit_type => ref[:UnitType],:city => ref[:City], :state => ref[:RegionAbbr],:zip_5 => ref[:Postal])
+    if @address.save
+      redirect_to @address
+    else
+      # binding.pry
+      render 'new'
+    end
 
     # render 'new'
   end
   
   
   def show
+    @address=Address.find_by(id: params[:id])
   end
 
   private
