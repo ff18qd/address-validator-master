@@ -6,7 +6,6 @@ $(document).ready(function () {
   //your code here
   $("#add_form").submit(function(e) {
         // alert('being clicked');
-        console.log("d");
         e.preventDefault();
         var st = $("input[id='street_address']").val();
         var city =  $("input[id='city']").val();
