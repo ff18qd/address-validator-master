@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+    body {
+        text-align: center;
+    }
+
+    form { 
+        display: inline-block;
+        /*margin-top: 0em;*/
+        margin: 30px auto;
+        width: 450px;
+      
+    }
+    
+    input, label {
+      margin: 5px 5px;
+    }
+    
+    
+    form input {
+      float: left;
+    }
+    
+    #street_address {
+      width: 96%;
+    }
+    
+    #city {
+      width: 50%;
+    }
+    
+    #state {
+      width: 43%;
+    }
+    
+    #zip {
+      width: 60%;
+    }
+    
+        
+    </style>
     <title>AddressValidator</title>
     <%= csrf_meta_tags %>
 

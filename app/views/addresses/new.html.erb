@@ -1,23 +1,23 @@
-
+<h2>Address Validator</h2>
 <%= form_tag '/addresses', method: :post, :id => "add_form" do %>
     <div>
-      <%= label_tag :street_address %>
-      <%= text_field_tag :street_address%>
+      <%#= label_tag :street_address %>
+      <%= text_field_tag :street_address, nil,  placeholder: 'Street address'%>
     </div>
 
     <div>
-      <%= label_tag :city %>
-      <%= text_field_tag :city%>
+      <%#= label_tag :city %>
+      <%= text_field_tag :city, nil,  placeholder: 'City'%>
     </div>
 
     <div>
-      <%= label_tag :state %>
-      <%= text_field_tag :state%>
+      <%#= label_tag :state %>
+      <%= text_field_tag :state, nil, placeholder: 'State' %>
     </div>
 
     <div>
-      <%= label_tag :zip_code %>
-      <%= text_field_tag :zip_code %>
+      <%#= label_tag :zip_code %>
+      <%= text_field_tag :zip_code, nil, placeholder: 'Zip code' %>
     </div>
 
     <div class = "buttons">
