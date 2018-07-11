@@ -13,13 +13,13 @@ $(document).ready(function () {
         var state =  $("input[id='state']").val();
         var zip =  $("input[id='zip_code']").val();
         var singleadd = `${st},  ${city}, ${state}, ${zip}`;
-        var token = "Pd8sde6pDbrh2Qd-s0lWhKyx8wwSsgkFisjOz7bdRiaTafAxokjWYVQKb2VcSUkuk_YYA_A5AADu4oYvumC2_hccdZP9ktXRVWO_Zo14Ieywc8aKTBJNc8ORb72e2W1RVl-oy-HQZLS5emQIBZaB3g.."
+        var token = "YwnlcGlz5qmtcE0PTC6T82YfXPwac_kBUiqlwuceTqCW48QxxOuR1JtIfb4LjSit3wznWl7PMokTYw78HDIHzAUuy5z7tPhr_lDOIvosPTdxLTg2hhiuVANFRKvSd17LHfo2I2jzEaxcY8wvtj-1gQ.."
         var url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=" + singleadd +"&maxLocations=1&forStorage=true&outFields=AddNum,StName,StType,StPreDir,StDir,UnitType,UnitName,City,RegionAbbr,Postal&token=" + token +"&f=pjson"
 
         fetch(url)
           .then((resp) => resp.json())
           .then(function(data) {
-            $.post("http://ec2-18-222-196-89.us-east-2.compute.amazonaws.com:8080/addresses", { address: data["candidates"][0] })
+            $.post("http://ec2-18-191-248-3.us-east-2.compute.amazonaws.com:8080/addresses", { address: data["candidates"][0] })
               
           })
       
