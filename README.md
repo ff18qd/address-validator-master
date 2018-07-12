@@ -84,9 +84,40 @@ Your finished project should:
 
 When submitting the project please answer the following questions:
  1. What gems if any did you choose to use and why?
+ I have applied pry for test and debug my code. I also applied jquery-rails gem to use jQuery to interacte with frontend.
+
  2. Were there any specific challenges or struggles you faced along the way?
+ I think the project was meant to find a way to get the input to the Address model and create a new address object. This step I haven't 
+thought it out cause the input of street address needs to be broken down into Address columns. After broken down and tried to save the address
+the validation step will take place. 
+
+As you could see, I didn't realize the app in the above way. I used Geocoder to first validate the input address then break down each part and 
+persist it to database. Because geocoder api can provide the break down function of the address.
+
  3. Is there anything you'd want to improve or optimize if you had more time?
+I would like to provide a function which when user input an address, a list of similar addresses are provided for user to select from. These
+addresses list can be provided by geocoder api. The goal is sometimes user input address format is not very accurate, and the popup list can 
+help them select a more accurate address.  
+
+Maybe an auto fill after user has selected one address from the list.
  4. If you were to take this project to production, what would be on your list of things to do?
+Unit test, code review, system test, regression test, UAT, go no-go decision.
+
+ 5. How my application works?
+In question 2 I said I realized my app in a different way. So here I would like to explain my solution. To run my application, please change the 
+token in address.js line 16 app/assets/javascripts to your token of geocode api (https://developers.arcgis.com/get-started/). Then in the app's index
+page, input street address, city, state and zip code. Clicking validate address button. This action will trigger a fetch request to geocode api
+the api will findAddressCandidates for user's input address and send back data["responseJSON"] a JSON object. The keys of this object have the 
+corresponding match with address schema. Create method will create a new address object with this JSON object. It will take no matter what JSON gives.
+
+Then when persisting to database, the validation of format will happen. jQuery post function will use a callback function to deal with error 
+messages from failed persistance. I used alert to display the error messages. If the user input can be found by geocode, geocode can fill 
+certain missing part this is why alert seems not include all the errors.
+
+If the data can be saved successfully user will be redirect to show page which will use to_s method to display the full address that user has input.
+
+
+
 
 
 
