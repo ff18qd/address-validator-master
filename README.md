@@ -101,7 +101,7 @@ help them select a more accurate address.
 
 Maybe an auto fill after user has selected one address from the list.
  4. If you were to take this project to production, what would be on your list of things to do?
-Unit test, code review, system test, regression test, UAT, go no-go decision.
+Development, unit test, code review, system test, regression test, UAT, deployment.
 
  5. How my application works?
 In question 2 I said I realized my app in a different way. So here I would like to explain my solution. To run my application, please change the 
