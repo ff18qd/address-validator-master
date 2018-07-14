@@ -12,25 +12,27 @@ $(document).ready(function () {
         var state =  $("input[id='state']").val();
         var zip =  $("input[id='zip_code']").val();
         var singleadd = `${st},  ${city}, ${state}, ${zip}`;
-        var token = "F4-JyBVQCBjOfh4CwRNjlIW6Wo_b6yay_c7Ppn2DmSG4ayZd2ypTaBQLxW7cLjFvrK8XpOJdvMU7QwrJS64vDA_7utg3uFga9edUDODHaLis4X9felGylqoERznrSucqlyqUzZxI0egQ8L1wJhLjjw.."
+        var token = "aBFOf-5JAvAhrHDDG0Bd-MCCAYbQ3alIXV9VEFjDdEGpxtyUfO2OIEfey3BBDmnBP01LJQArMt4eu4IWcuZPFWx70M5DnBiaMB85xhXg4BGKhK1hjuU7way102Rpuv5QyxBp5LQNNTAYBRV6dT9jaQ.."
         var url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=" + singleadd +"&maxLocations=1&forStorage=true&outFields=AddNum,StName,StType,StPreDir,StDir,UnitType,UnitName,City,RegionAbbr,Postal&token=" + token +"&f=pjson"
 
         fetch(url)
           .then((resp) => resp.json())
           .then(function(data) {
-            $.post("http://ec2-18-219-94-25.us-east-2.compute.amazonaws.com:8080/addresses", { address: data["candidates"][0] }, function(err) {
-              // alert(err.responseText);
+            $.post("http://ec2-18-191-134-35.us-east-2.compute.amazonaws.com:8080/addresses", { address: data["candidates"][0] }, function(err) {
               console.log(err);
-              alert(err);
             })
             .fail(function(data) {
               // alert( "error" );
-              console.log(data["responseJSON"]);
-              var popError = [];
-              for(let ele in data["responseJSON"]) {
-                popError.push(ele +":" + data["responseJSON"][ele][0] + ";");
+              if (data["responseJSON"]) {
+                  console.log(data["responseJSON"]);
+                  var popError = [];
+                  for(let ele in data["responseJSON"]) {
+                    popError.push(ele +":" + data["responseJSON"][ele][0] + ";");
+                  }
+                  alert(popError);
+              } else {
+                alert('Please make sure you have filled out all the content');
               }
-              alert(popError);
               
             })
               
